@@ -1,0 +1,81 @@
+.header_game {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  border: 2px solid rgb(105, 105, 105);
+  box-shadow: 1px 1px 2px 1px rgb(105, 105, 105);
+}
+
+.bombs_completed {
+  background-image: url('./assets/score0.png');
+  height: 23px;
+  width: 13px;
+}
+
+.bombs_left {
+  background-image: url('./assets/score0.png');
+  height: 23px;
+  width: 13px;
+}
+
+.start {
+  cursor: pointer;
+  border: none;
+  height: 26px;
+  width: 26px;
+  background-image: url('./assets/start.png');
+}
+
+.field_container {
+  display: flex;
+  justify-content: center;
+  margin-top: 8%;
+}
+
+.field {
+  height: 400px;
+  width: 330px;
+  background-color: rgb(235, 235, 235);
+  padding: 10px;
+  border: 3px solid rgb(105, 105, 105);
+  box-shadow: 1px 1px 2px 1px rgb(105, 105, 105);
+}
+
+.field_btns_container {
+  padding: 5px;
+  margin-top: 25px;
+  border: 2px solid rgb(105, 105, 105);
+  box-shadow: 1px 1px 2px 1px rgb(105, 105, 105);
+}
+
+.field_btns {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(16, 20px);
+}
+
+.btn {
+  cursor: pointer;
+  height: 20px;
+  font-size: 20px;
+}
+
+.bomb {
+  display: flex;
+  justify-content: center;
+  height: 18px;
+  width: 18px;
+  margin-left: -7px;
+  margin-top: -2px;
+  background-image: url('./assets/bomb.png');
+  box-sizing: border-box;
+  border-radius: 2px;
+}
+
+.notBomb {
+  display: flex;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: -1px;
+}
