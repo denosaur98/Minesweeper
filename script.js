@@ -5,18 +5,26 @@ function startTimer() {
   let timerId = null;
   let timerRunning = false;
   const gameTimer = document.querySelector('.game_time');
-  gameTimer.textContent = '000';
+
+  // Добавляем начальное значение изображений score
+  gameTimer.innerHTML = '<span class="score-0"></span><span class="score-0"></span><span class="score-0"></span>';
 
   function updateTimer() {
     const currentTime = new Date().getTime();
     const elapsedTime = Math.floor((currentTime - startTime) / 1000);
     if (elapsedTime >= 999) {
       clearInterval(timerId);
-      gameTimer.textContent = '999';
+      gameTimer.innerHTML = '<span class="score-9"></span><span class="score-9"></span><span class="score-9"></span>';
       return;
     }
     const formattedTime = elapsedTime.toString().padStart(3, '0');
-    gameTimer.textContent = formattedTime;
+    gameTimer.innerHTML = '';
+    for (let i = 0; i < formattedTime.length; i++) {
+      const digit = formattedTime.charAt(i);
+      const span = document.createElement('span');
+      span.classList.add(`score-${digit}`);
+      gameTimer.appendChild(span);
+    }
   }
 
   function handleGameEnd() {
