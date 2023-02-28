@@ -1,4 +1,47 @@
 startGame(16, 16, 40)
+startTimer()
+function startTimer() {
+  let startTime = null;
+  let timerId = null;
+  let timerRunning = false;
+  const gameTimer = document.querySelector('.game_time');
+  gameTimer.textContent = '000';
+
+  function updateTimer() {
+    const currentTime = new Date().getTime();
+    const elapsedTime = Math.floor((currentTime - startTime) / 1000);
+    if (elapsedTime >= 999) {
+      clearInterval(timerId);
+      gameTimer.textContent = '999';
+      return;
+    }
+    const formattedTime = elapsedTime.toString().padStart(3, '0');
+    gameTimer.textContent = formattedTime;
+  }
+
+  function handleGameEnd() {
+    clearInterval(timerId);
+    timerRunning = false;
+  }
+
+  function handleFieldBtnClick() {
+    if (!timerRunning) {
+      startTime = new Date().getTime();
+      timerId = setInterval(updateTimer, 1000);
+      timerRunning = true;
+    }
+  }
+
+  document.querySelectorAll('.field_btns button').forEach(btn => {
+    btn.addEventListener('click', handleFieldBtnClick);
+  });
+  document.querySelector('.start').addEventListener('click', () => {
+    startTime = new Date().getTime();
+    timerId = setInterval(updateTimer, 1000);
+    timerRunning = true;
+  });
+  document.querySelector('.game_time').addEventListener('click', handleGameEnd);
+}
 
 const startBtn = document.querySelector('.start')
 startBtn.addEventListener('click', restartGame)

@@ -12,10 +12,19 @@
   width: 13px;
 }
 
-.bombs_left {
-  background-image: url('./assets/score0.png');
+.game_time_container {
+  background-color: rgb(0, 0, 0);
   height: 23px;
-  width: 13px;
+  width: 39px;
+}
+
+.game_time {
+  margin-top: -1px;
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 0, 0);
+  align-items: center;
+  text-align: center;
+  font-size: 25px;
 }
 
 .start {
