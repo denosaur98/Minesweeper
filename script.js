@@ -47,6 +47,19 @@ function startGame(width, height, bombsCount) {
     return count
   }
 
+  function handleFieldMouseDown() {
+    startBtn.classList.remove('start');
+    startBtn.classList.add('wow');
+  }
+
+  function handleFieldMouseUp() {
+    startBtn.classList.remove('wow');
+    startBtn.classList.add('start');
+  }
+
+  field.addEventListener('mousedown', handleFieldMouseDown);
+  field.addEventListener('mouseup', handleFieldMouseUp);
+
   function disableField() {
     const field = document.querySelector('.field_btns')
     const cells = field.querySelectorAll('button')
@@ -122,5 +135,5 @@ function startGame(width, height, bombsCount) {
     if(!isValid(row, column)) return false
     const index = row * width + column
     return bombs.includes(index)
-  } 
+  }
 }

@@ -42,6 +42,14 @@
   background-image: url('./assets/lose.png');
 }
 
+.wow {
+  cursor: pointer;
+  border: none;
+  height: 26px;
+  width: 26px;
+  background-image: url('./assets/wow.png');
+}
+
 .field_container {
   display: flex;
   justify-content: center;
@@ -84,6 +92,18 @@
   margin-left: -7px;
   margin-top: -2px;
   background-image: url('./assets/bomb.png');
+  box-sizing: border-box;
+  border-radius: 2px;
+}
+
+.bomb_cmpl {
+  display: flex;
+  justify-content: center;
+  height: 18px;
+  width: 18px;
+  margin-left: -7px;
+  margin-top: -2px;
+  background-image: url('./assets/bomb_cmpl.png');
   box-sizing: border-box;
   border-radius: 2px;
 }
