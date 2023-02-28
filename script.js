@@ -3,6 +3,23 @@ startGame(16, 16, 40)
 const startBtn = document.querySelector('.start')
 startBtn.addEventListener('click', restartGame)
 
+function handleStartMouseDown() {
+  startBtn.classList.remove('start')
+  startBtn.classList.remove('lose')
+  startBtn.classList.remove('win')
+  startBtn.classList.add('start_pressed')
+}
+
+function handleStartMouseUp() {
+  startBtn.classList.remove('start_pressed')
+  startBtn.classList.remove('lose')
+  startBtn.classList.remove('win')
+  startBtn.classList.add('start')
+}
+
+startBtn.addEventListener('mousedown', handleStartMouseDown)
+startBtn.addEventListener('mouseup', handleStartMouseUp)
+
 function restartGame() {
   startBtn.classList.remove('win')
   startBtn.classList.remove('lose')

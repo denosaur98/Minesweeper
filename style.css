@@ -26,6 +26,14 @@
   background-image: url('./assets/start.png');
 }
 
+.start_pressed {
+  cursor: pointer;
+  border: none;
+  height: 26px;
+  width: 26px;
+  background-image: url('./assets/start_pressed.png');
+}
+
 .win {
   cursor: pointer;
   border: none;
