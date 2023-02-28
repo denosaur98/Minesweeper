@@ -1,7 +1,17 @@
 startGame(16, 16, 40)
 
+const startBtn = document.querySelector('.start')
+startBtn.addEventListener('click', restartGame)
+
+function restartGame() {
+  startBtn.classList.remove('win')
+  startBtn.classList.remove('lose')
+  startGame(16, 16, 40)
+}
+
 function startGame(width, height, bombsCount) {
   const field = document.querySelector('.field_btns')
+  field.addEventListener('contextmenu', toggleFlag)
   const cellsCount = width * height
   field.innerHTML = '<button class="btn"></button>'.repeat(cellsCount)
   const cells = [...field.children]
@@ -37,6 +47,36 @@ function startGame(width, height, bombsCount) {
     return count
   }
 
+  function disableField() {
+    const field = document.querySelector('.field_btns')
+    const cells = field.querySelectorAll('button')
+    cells.forEach(cell => {
+      if (!cell.classList.contains('start')) {
+        cell.disabled = true
+      }
+    })
+  }
+  
+  function toggleFlag(e) {
+    e.preventDefault();
+  
+    if (e.target.tagName !== 'BUTTON') {
+      return;
+    }
+  
+    const cell = e.target;
+    
+    if (cell.disabled === true) {
+      return;
+    }
+  
+    if (cell.classList.contains('flag')) {
+      cell.classList.remove('flag');
+    } else {
+      cell.classList.add('flag');
+    }
+  }
+
   function open(row, column) {
     if(!isValid(row, column)) return
     
@@ -48,21 +88,27 @@ function startGame(width, height, bombsCount) {
 
     if(isBomb(row, column)) {
       cell.innerHTML = '<div class="bomb"></div>'
-      alert('Проиграл')
+      disableField()
+      startBtn.classList.add('lose')
       return
     }
 
     closedCount--
     if(closedCount <= bombsCount) {
-      alert('Выиграл!')
+      startBtn.classList.add('win')
       return
     }
 
     const count = getCount(row, column)
     
-    if(count !== 0) {
-      cell.innerHTML = `<div class="notBomb">${count}</div>`
-      return
+    if (count !== 0) {
+      const colors = ['green', 'blue', 'red', 'blue', 'brown', 'cyan', 'black', 'gray'];
+      const notBomb = document.createElement('div');
+      notBomb.className = 'notBomb';
+      notBomb.style.color = colors[count - 1];
+      notBomb.textContent = count;
+      cell.appendChild(notBomb);
+      return;
     }
     
     for(let i = -1; i <= 1; i++) {

@@ -26,6 +26,22 @@
   background-image: url('./assets/start.png');
 }
 
+.win {
+  cursor: pointer;
+  border: none;
+  height: 26px;
+  width: 26px;
+  background-image: url('./assets/win.png');
+}
+
+.lose {
+  cursor: pointer;
+  border: none;
+  height: 26px;
+  width: 26px;
+  background-image: url('./assets/lose.png');
+}
+
 .field_container {
   display: flex;
   justify-content: center;
@@ -78,4 +94,13 @@
   font-size: 15px;
   font-weight: bold;
   margin-top: -1px;
+}
+
+.flag {
+  width: 20px;
+  height: 20px;
+  background-image: url('./assets/flag.png');
+  background-size: cover;
+  border-radius: 2px;
+  border: 1px solid rgb(117, 117, 117);
 }
