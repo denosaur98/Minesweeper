@@ -6,7 +6,6 @@ function startTimer() {
   let timerRunning = false;
   const gameTimer = document.querySelector('.game_time');
 
-  // Добавляем начальное значение изображений score
   gameTimer.innerHTML = '<span class="score-0"></span><span class="score-0"></span><span class="score-0"></span>';
 
   function updateTimer() {
@@ -185,6 +184,11 @@ function startGame(width, height, bombsCount) {
     }
 
     const count = getCount(row, column)
+
+    if(count === 0) {
+
+      cell.classList.add('back_pressed_null')
+    }
     
     if(count !== 0) {
       const colors = ['green', 'blue', 'red', 'blue', 'brown', 'cyan', 'black', 'gray'];
@@ -192,6 +196,7 @@ function startGame(width, height, bombsCount) {
       notBomb.className = 'notBomb';
       notBomb.style.color = colors[count - 1];
       notBomb.textContent = count;
+      notBomb.classList.add('back_pressed')
       cell.appendChild(notBomb);
       return;
     }
