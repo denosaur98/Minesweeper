@@ -34,7 +34,7 @@ function startGame(width, height, bombsCount) {
   const cells = [...field.children]
 
   let closedCount = cellsCount
-
+  
   const bombs = [...Array(cellsCount).keys()]
   .sort(() => Math.random() - 0.5).slice(0, bombsCount)
 
@@ -78,14 +78,18 @@ function startGame(width, height, bombsCount) {
   field.addEventListener('mouseup', handleFieldMouseUp);
 
   function disableField() {
-    const field = document.querySelector('.field_btns')
-    const cells = field.querySelectorAll('button')
-    cells.forEach(cell => {
-      if (!cell.classList.contains('start')) {
-        cell.disabled = true
+    const field = document.querySelector('.field_btns');
+    const cells = field.querySelectorAll('button');
+  
+    cells.forEach((cell, index) => {
+      cell.disabled = true;
+  
+      if(bombs.includes(index)) {
+        cell.classList.add('bomb_cmpl');
       }
-    })
+    });
   }
+  
   
   function toggleFlag(e) {
     e.preventDefault();
@@ -96,11 +100,11 @@ function startGame(width, height, bombsCount) {
   
     const cell = e.target;
     
-    if (cell.disabled === true) {
+    if(cell.disabled === true) {
       return;
     }
   
-    if (cell.classList.contains('flag')) {
+    if(cell.classList.contains('flag')) {
       cell.classList.remove('flag');
     } else {
       cell.classList.add('flag');
@@ -131,7 +135,7 @@ function startGame(width, height, bombsCount) {
 
     const count = getCount(row, column)
     
-    if (count !== 0) {
+    if(count !== 0) {
       const colors = ['green', 'blue', 'red', 'blue', 'brown', 'cyan', 'black', 'gray'];
       const notBomb = document.createElement('div');
       notBomb.className = 'notBomb';
