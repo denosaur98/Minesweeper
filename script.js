@@ -70,10 +70,29 @@ function handleStartMouseUp() {
 startBtn.addEventListener('mousedown', handleStartMouseDown)
 startBtn.addEventListener('mouseup', handleStartMouseUp)
 
+function resetGame() {
+  clearInterval(timerId);
+  startTime = null;
+  timerRunning = false;
+  const gameTimer = document.querySelector('.game_time');
+  gameTimer.innerHTML = '<span class="score-0"></span><span class="score-0"></span><span class="score-0"></span>';
+  const field = document.querySelector('.field_btns');
+  field.removeEventListener('click', handleClick);
+  field.removeEventListener('mousedown', handleFieldMouseDown);
+  field.removeEventListener('mouseup', handleFieldMouseUp);
+  field.removeEventListener('contextmenu', toggleFlag);
+  const cells = field.querySelectorAll('button');
+  cells.forEach(cell => {
+    cell.disabled = false;
+    cell.classList.remove('open', 'flag', 'question', 'question_pressed', 'bomb', 'bomb_red');
+    cell.innerHTML = '';
+  });
+  cellStates = [];
+}
+
 function restartGame() {
-  startBtn.classList.remove('win')
-  startBtn.classList.remove('lose')
   startGame(16, 16, 40)
+  resetGame()
 }
 
 function startGame(width, height, bombsCount) {
@@ -85,9 +104,8 @@ function startGame(width, height, bombsCount) {
 
   let closedCount = cellsCount
   
-  const bombs = [...Array(cellsCount).keys()]
-  .sort(() => Math.random() - 0.5).slice(0, bombsCount)
-
+  const bombs = [...Array(cellsCount).keys()].sort(() => Math.random() - 0.5).slice(0, bombsCount)
+  resetField()
   field.addEventListener('click', (e) => {
     if(e.target.tagName !== 'BUTTON') {
       return
@@ -97,6 +115,14 @@ function startGame(width, height, bombsCount) {
     const row = Math.floor(index / width)
     open(row, column)
   })
+
+  resetField()
+  function resetField() {
+    cells.forEach(cell => {
+      cell.disabled = false;
+      cell.classList.remove('flag', 'question', 'question_pressed');
+    });
+  }
 
   function isValid(row, column) {
     return row >= 0 && row < height && column >= 0 && column < width
@@ -140,23 +166,35 @@ function startGame(width, height, bombsCount) {
     });
   }
   
-  
+  let cellStates = [];
+
   function toggleFlag(e) {
     e.preventDefault();
-  
+
     if (e.target.tagName !== 'BUTTON') {
       return;
     }
-  
+
     const cell = e.target;
-    
-    if(cell.disabled === true) {
+    const cellIndex = Array.from(cell.parentNode.children).indexOf(cell);
+
+    if (cell.disabled === true) {
       return;
     }
-  
-    if(cell.classList.contains('flag')) {
+
+    if (cellStates[cellIndex] === 'flag') {
+      cellStates[cellIndex] = 'question';
       cell.classList.remove('flag');
+      cell.classList.add('question');
+    } else if (cellStates[cellIndex] === 'question') {
+      cellStates[cellIndex] = '';
+      cell.classList.remove('question');
+      cell.classList.add('question_pressed');
+    } else if (cellStates[cellIndex] === 'question_pressed') {
+      cellStates[cellIndex] = '';
+      cell.classList.remove('question_pressed');
     } else {
+      cellStates[cellIndex] = 'flag';
       cell.classList.add('flag');
     }
   }

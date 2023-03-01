@@ -13,7 +13,7 @@
 }
 
 .game_bombs_count {
-
+  color: black;
 }
 
 .game_time {
@@ -142,8 +142,20 @@
   height: 20px;
   background-image: url('./assets/flag.png');
   background-size: cover;
-  border-radius: 2px;
-  border: 1px solid rgb(117, 117, 117);
+}
+
+.question {
+  width: 20px;
+  height: 20px;
+  background-image: url('./assets/question.png');
+  background-size: cover;
+}
+
+.question_perssed {
+  width: 20px;
+  height: 20px;
+  background-image: url('./assets/question_pressed.png');
+  background-size: cover;
 }
 
 .score-0 {
