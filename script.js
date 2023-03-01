@@ -116,7 +116,6 @@ function startGame(width, height, bombsCount) {
     const column = index % width
     const row = Math.floor(index / width)
     if (!firstClicked) {
-      // на первом клике рандомно выбираем ячейки, которые будут без бомб
       bombs = [...Array(cellsCount).keys()]
         .filter(i => i !== index)
         .sort(() => Math.random() - 0.5)
