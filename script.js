@@ -224,7 +224,6 @@ function startGame(width, height, bombsCount) {
     const count = getCount(row, column)
 
     if(count === 0) {
-
       cell.classList.add('back_pressed_null')
     }
     
