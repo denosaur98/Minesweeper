@@ -104,7 +104,9 @@ function startGame(width, height, bombsCount) {
 
   let closedCount = cellsCount
   
-  const bombs = [...Array(cellsCount).keys()].sort(() => Math.random() - 0.5).slice(0, bombsCount)
+  let bombs = [...Array(cellsCount).keys()]
+  let firstClicked = false
+
   resetField()
   field.addEventListener('click', (e) => {
     if(e.target.tagName !== 'BUTTON') {
@@ -113,6 +115,14 @@ function startGame(width, height, bombsCount) {
     const index = cells.indexOf(e.target)
     const column = index % width
     const row = Math.floor(index / width)
+    if (!firstClicked) {
+      // на первом клике рандомно выбираем ячейки, которые будут без бомб
+      bombs = [...Array(cellsCount).keys()]
+        .filter(i => i !== index)
+        .sort(() => Math.random() - 0.5)
+        .slice(0, bombsCount)
+      firstClicked = true
+    }
     open(row, column)
   })
 
