@@ -229,6 +229,14 @@ function startGame(width, height, bombsCount) {
       return;
     }
 
+    const flags = cellStates.filter(state => state === 'flag').length;
+
+    if (flags >= bombsCount) {
+      if (cellStates[cellIndex] !== 'flag') {
+        return;
+      }
+    }
+
     if (cellStates[cellIndex] === 'flag') {
       cellStates[cellIndex] = 'question';
       cell.classList.remove('flag');
@@ -244,7 +252,7 @@ function startGame(width, height, bombsCount) {
       cellStates[cellIndex] = 'flag';
       cell.classList.add('flag');
     }
-    updateBombsCount()
+    updateBombsCount();
   }
 
   function open(row, column) {
