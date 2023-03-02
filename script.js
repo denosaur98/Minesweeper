@@ -136,15 +136,13 @@ function startGame(width, height, bombsCount) {
   function updateBombsCount() {
     const bombsCountElem = document.querySelector('.game_bombs_count');
     const bombsLeft = bombsCount - document.querySelectorAll('.field_btns button.bomb.open, .field_btns button.bomb.flag').length;
-    const flagsCount = document.querySelectorAll('.field_btns button.flag').length;
+    const flagsCount = document.querySelectorAll('.field_btns button.flag, .field_btns button.question').length;
     bombsCountElem.innerHTML = bombsLeft < 0 ? 0 : bombsLeft - flagsCount;
     startBtn.addEventListener('click', () => {
       const bombsCountElem = document.querySelector('.game_bombs_count');
       bombsCountElem.innerHTML = bombsCount;
     });
   }
-  
-  
 
   function isValid(row, column) {
     return row >= 0 && row < height && column >= 0 && column < width
