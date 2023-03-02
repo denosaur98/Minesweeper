@@ -71,9 +71,8 @@ startBtn.addEventListener('mousedown', handleStartMouseDown)
 startBtn.addEventListener('mouseup', handleStartMouseUp)
 
 function resetGame() {
+  cellStates = [];
   clearInterval(timerId);
-  startTime = null;
-  timerRunning = false;
   const gameTimer = document.querySelector('.game_time');
   gameTimer.innerHTML = '<span class="score-0"></span><span class="score-0"></span><span class="score-0"></span>';
   const field = document.querySelector('.field_btns');
@@ -87,7 +86,6 @@ function resetGame() {
     cell.classList.remove('open', 'flag', 'question', 'question_pressed', 'bomb', 'bomb_red');
     cell.innerHTML = '';
   });
-  cellStates = [];
 }
 
 function restartGame() {
@@ -107,7 +105,6 @@ function startGame(width, height, bombsCount) {
   let bombs = [...Array(cellsCount).keys()]
   let firstClicked = false
 
-  resetField()
   field.addEventListener('click', (e) => {
     if(e.target.tagName !== 'BUTTON') {
       return
@@ -135,8 +132,8 @@ function startGame(width, height, bombsCount) {
 
   beginBombValue()
   function beginBombValue() {
-    const beginValue = document.querySelector('.game_bombs_count')
-    beginValue.innerHTML = '<span class="score-0"></span><span class="score-4"></span><span class="score-0"></span>'
+    const beginValue = document.querySelector('.game_bombs_count');
+    beginValue.innerHTML = '<span class="score-0"></span><span class="score-4"></span><span class="score-0"></span>';
   }
 
   function updateBombsCount() {
@@ -144,14 +141,34 @@ function startGame(width, height, bombsCount) {
     const bombsLeft = bombsCount - document.querySelectorAll('.field_btns button.bomb.open, .field_btns button.bomb.flag').length;
     const flagsCount = document.querySelectorAll('.field_btns button.flag, .field_btns button.question').length;
   
+    let bombsMarked = flagsCount;
+    if (bombsMarked < 0) {
+      bombsMarked = 0;
+    }
+    if (bombsMarked > bombsLeft) {
+      bombsMarked = bombsLeft;
+    }
+  
     bombsCountElem.innerHTML = '';
-    const bombsLeftStr = (bombsLeft < 0 ? 0 : bombsLeft - flagsCount).toString().padStart(3, '0');
+    const bombsLeftStr = (bombsLeft < 0 ? 0 : bombsLeft - bombsMarked).toString().padStart(3, '0');
     for (let i = 0; i < 3; i++) {
       const digit = bombsLeftStr.charAt(i);
       const span = document.createElement('span');
       span.classList.add(`score-${digit}`);
       bombsCountElem.appendChild(span);
     }
+  
+    const bombButtons = document.querySelectorAll('.field_btns button.bomb');
+    if (bombsMarked === bombsLeft) {
+      bombButtons.forEach(button => {
+        if (!button.classList.contains('flag')) {
+          button.disabled = true;
+        }
+      });
+    } else {
+      bombButtons.forEach(button => button.disabled = false);
+    }
+    return bombsMarked;
   }
 
   function isValid(row, column) {
@@ -274,7 +291,6 @@ function startGame(width, height, bombsCount) {
         open(row + j, column + i)
       }
     }
-    updateBombsCount()
   }
 
   function isBomb(row, column) {
