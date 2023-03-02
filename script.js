@@ -133,6 +133,12 @@ function startGame(width, height, bombsCount) {
     });
   }
 
+  beginBombValue()
+  function beginBombValue() {
+    const beginValue = document.querySelector('.game_bombs_count')
+    beginValue.innerHTML = '<span class="score-0"></span><span class="score-4"></span><span class="score-0"></span>'
+  }
+  
   function updateBombsCount() {
     const bombsCountElem = document.querySelector('.game_bombs_count');
     const bombsLeft = bombsCount - document.querySelectorAll('.field_btns button.bomb.open, .field_btns button.bomb.flag').length;
@@ -146,13 +152,12 @@ function startGame(width, height, bombsCount) {
       span.classList.add(`score-${digit}`);
       bombsCountElem.appendChild(span);
     }
-  
+    
     startBtn.addEventListener('click', () => {
       bombsCountElem.innerHTML = '';
       bombsCountElem.innerHTML = '<span class="score-0"></span><span class="score-4"></span><span class="score-0"></span>';
     });
   }
-  
 
   function isValid(row, column) {
     return row >= 0 && row < height && column >= 0 && column < width
