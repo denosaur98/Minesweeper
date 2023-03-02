@@ -16,7 +16,9 @@
 }
 
 .game_bombs_count {
-  color: black;
+  background-color: rgb(0, 0, 0);
+  display: flex;
+  margin-top: 2px;
 }
 
 .game_time {

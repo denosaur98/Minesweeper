@@ -137,12 +137,22 @@ function startGame(width, height, bombsCount) {
     const bombsCountElem = document.querySelector('.game_bombs_count');
     const bombsLeft = bombsCount - document.querySelectorAll('.field_btns button.bomb.open, .field_btns button.bomb.flag').length;
     const flagsCount = document.querySelectorAll('.field_btns button.flag, .field_btns button.question').length;
-    bombsCountElem.innerHTML = bombsLeft < 0 ? 0 : bombsLeft - flagsCount;
+  
+    bombsCountElem.innerHTML = '';
+    const bombsLeftStr = (bombsLeft < 0 ? 0 : bombsLeft - flagsCount).toString().padStart(3, '0');
+    for (let i = 0; i < 3; i++) {
+      const digit = bombsLeftStr.charAt(i);
+      const span = document.createElement('span');
+      span.classList.add(`score-${digit}`);
+      bombsCountElem.appendChild(span);
+    }
+  
     startBtn.addEventListener('click', () => {
-      const bombsCountElem = document.querySelector('.game_bombs_count');
-      bombsCountElem.innerHTML = bombsCount;
+      bombsCountElem.innerHTML = '';
+      bombsCountElem.innerHTML = '<span class="score-0"></span><span class="score-4"></span><span class="score-0"></span>';
     });
   }
+  
 
   function isValid(row, column) {
     return row >= 0 && row < height && column >= 0 && column < width
