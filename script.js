@@ -60,7 +60,7 @@ function startTimer() {
 }
 
 const startBtn = document.querySelector('.start')
-startBtn.addEventListener('click', restartGame)
+startBtn.addEventListener('click', resetGame)
 
 function handleStartMouseDown() {
   startBtn.classList.remove('start')
@@ -80,6 +80,7 @@ startBtn.addEventListener('mousedown', handleStartMouseDown)
 startBtn.addEventListener('mouseup', handleStartMouseUp)
 
 function resetGame() {
+  startGame(16, 16, 40)
   cellStates = [];
   clearInterval(timerId);
   const gameTimer = document.querySelector('.game_time');
@@ -95,11 +96,6 @@ function resetGame() {
     cell.classList.remove('open', 'flag', 'question', 'question_pressed', 'bomb', 'bomb_red');
     cell.innerHTML = '';
   });
-}
-
-function restartGame() {
-  startGame(16, 16, 40)
-  resetGame()
 }
 
 function startGame(width, height, bombsCount) {
