@@ -11,6 +11,15 @@ function startTimer() {
   function updateTimer() {
     const currentTime = new Date().getTime();
     const elapsedTime = Math.floor((currentTime - startTime) / 1000);
+    if (elapsedTime >= 999 || startBtn.classList.contains('win')) {
+      clearInterval(timerId);
+      timerRunning = false;
+      if (startBtn.classList.contains('win')) {
+        alert('Победа!')
+      }
+      return;
+    }
+  
     if (elapsedTime >= 999) {
       clearInterval(timerId);
       gameTimer.innerHTML = '<span class="score-9"></span><span class="score-9"></span><span class="score-9"></span>';
