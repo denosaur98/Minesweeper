@@ -266,6 +266,11 @@ function startGame(width, height, bombsCount) {
     const index = row * width + column
     const cell = cells[index]
 
+    if(cell.classList.contains('flag') || cell.classList.contains('question')) {
+      cell.classList.remove('flag')
+      return
+    }
+
     if(cell.disabled === true) return
     cell.disabled = true
 
