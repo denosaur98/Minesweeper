@@ -1,3 +1,14 @@
+@media screen and (max-width: 600px) {
+  body {
+    background-image: url('./assets/background_mobile.png');
+  }
+}
+
+@font-face {
+  font-family: 'PressStart';
+  src: url('./assets/PressStart.ttf');
+}
+
 body {
   background-image: url('./assets/background.png');
   background-size: cover;
@@ -230,4 +241,20 @@ body {
   height: 23px;
   background-repeat: no-repeat;
   background-size: contain;
+}
+
+.footer_container {
+  display: flex;
+  justify-content: center;
+  margin: 45px;
+}
+
+.link {
+  font-family: 'PressStart';
+  font-size: 20px;
+}
+
+.link:hover {
+  color: #fff;
+  transition: 0.2s;
 }
