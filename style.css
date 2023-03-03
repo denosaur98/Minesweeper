@@ -147,8 +147,10 @@ body {
 }
 
 .notBomb {
-  font-size: 15px;
-  font-weight: bold;
+  font-family: 'PressStart';
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 500;
 }
 
 .back_pressed_null {

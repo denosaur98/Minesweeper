@@ -289,7 +289,7 @@ function startGame(width, height, bombsCount) {
     }
     
     if(count !== 0) {
-      const colors = ['green', 'blue', 'red', 'blue', 'brown', 'cyan', 'black', 'gray'];
+      const colors = ['blue', 'green', 'red', 'darkblue', 'brown', 'lightseagreen', 'black', 'gray'];
       const notBomb = document.createElement('div');
       notBomb.className = 'notBomb';
       notBomb.style.color = colors[count - 1];
