@@ -1,3 +1,10 @@
+body {
+  background-image: url('./assets/background.png');
+  background-size: cover;
+  height: 100%;
+  width: 99%;
+}
+
 .header_game {
   display: flex;
   justify-content: space-between;
