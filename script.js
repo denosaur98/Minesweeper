@@ -309,6 +309,7 @@ function startGame(width, height, bombsCount) {
         open(row + j, column + i)
       }
     }
+    updateBombsCount()
   }
 
   function isBomb(row, column) {
