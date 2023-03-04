@@ -1,4 +1,4 @@
-startGame(16, 16, 40)
+startGame(16, 16, 5)
 startTimer()
 function startTimer() {
   let startTime = null;
@@ -247,7 +247,7 @@ function startGame(width, height, bombsCount) {
       cell.classList.remove('flag');
       cell.classList.add('question');
     } else if (cellStates[cellIndex] === 'question') {
-      cellStates[cellIndex] = '';
+      cellStates[cellIndex] = 'question_pressed';
       cell.classList.remove('question');
       cell.classList.add('question_pressed');
     } else if (cellStates[cellIndex] === 'question_pressed') {
@@ -255,8 +255,10 @@ function startGame(width, height, bombsCount) {
       cell.classList.remove('question_pressed');
     } else {
       cellStates[cellIndex] = 'flag';
+      cell.classList.remove('question');
+      cell.classList.remove('question_pressed');
       cell.classList.add('flag');
-    }
+    }    
     updateBombsCount();
   }
 
