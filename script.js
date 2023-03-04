@@ -1,4 +1,4 @@
-startGame(16, 16, 5)
+startGame(16, 16, 40)
 startTimer()
 function startTimer() {
   let startTime = null;
