@@ -183,7 +183,7 @@ body {
   background-size: cover;
 }
 
-.question_perssed {
+.question_pressed {
   width: 20px;
   height: 20px;
   background-image: url('./assets/question_pressed.png');

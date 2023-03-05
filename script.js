@@ -242,6 +242,24 @@ function startGame(width, height, bombsCount) {
       }
     }
 
+    cell.addEventListener('mouseup', function() {
+      if (cellStates[cellIndex] === 'question_pressed') {
+        cell.classList.remove('question_pressed');
+        cell.classList.remove('flag');
+        cell.classList.remove('question');
+        cell.classList.add('btns');
+      }
+    });
+    
+    cell.addEventListener('mousedown', function(e) {
+      e.preventDefault();
+      if (cellStates[cellIndex] === 'question') {
+        cellStates[cellIndex] = 'question_pressed';
+        cell.classList.remove('question');
+        cell.classList.add('question_pressed');
+      }
+    });
+    
     if (cellStates[cellIndex] === 'flag') {
       cellStates[cellIndex] = 'question';
       cell.classList.remove('flag');
@@ -253,12 +271,15 @@ function startGame(width, height, bombsCount) {
     } else if (cellStates[cellIndex] === 'question_pressed') {
       cellStates[cellIndex] = '';
       cell.classList.remove('question_pressed');
+      cell.classList.remove('flag');
+      cell.classList.remove('question');
+      cell.classList.add('btns');
     } else {
       cellStates[cellIndex] = 'flag';
       cell.classList.remove('question');
       cell.classList.remove('question_pressed');
       cell.classList.add('flag');
-    }    
+    }
     updateBombsCount();
   }
 
